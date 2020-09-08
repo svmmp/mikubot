@@ -28,9 +28,10 @@ namespace mikubot.Modules
             replies.Add("Ask again");
             replies.Add("Miku doesn't know");
             replies.Add("Too tired to answer...");
+            replies.Add("...");
 
             embed.WithColor(new Discord.Color(0, 255, 0));
-            embed.Title = "Welcome to the 8-ball!";
+            embed.Title = "Ask Miku a Yes or No Question!";
 
             sb.AppendLine($"{Context.User.Username},");
             sb.AppendLine();
@@ -50,35 +51,40 @@ namespace mikubot.Modules
                 switch (answer)
                 {
                     case "yes":
-                        {
-                            embed.WithColor(new Discord.Color(0, 255, 0));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(0, 255, 0));
+                        break;
+                    }
                     case "no":
-                        {
-                            embed.WithColor(new Discord.Color(255, 0, 0));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(255, 0, 0));
+                        break;
+                    }
                     case "maybe":
-                        {
-                            embed.WithColor(new Discord.Color(255, 255, 0));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(255, 255, 0));
+                        break;
+                    }
                     case "ask again":
-                        {
-                            embed.WithColor(new Discord.Color(255, 255, 255));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(255, 255, 255));
+                        break;
+                    }
                     case "Miku doesn't know":
-                        {
-                            embed.WithColor(new Discord.Color(255, 0, 255));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(255, 0, 255));
+                        break;
+                    }
                     case "Too tired to answer...":
-                        {
-                            embed.WithColor(new Discord.Color(0, 0, 255));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(0, 0, 255));
+                        break;
+                    }
+                    case "...":
+                    {
+                        embed.WithColor(new Discord.Color(0, 0, 0));
+                        break;
+                    }
                 }
             }
 

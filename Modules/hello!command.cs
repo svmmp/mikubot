@@ -14,7 +14,7 @@ namespace mikubot.Modules
     public class ExampleCommands : ModuleBase
     {
         [Command("talktomiku")]
-        [Alias("hello!")]
+        [Alias("hello")]
         public async Task HelloCommand([Remainder]string args = null)
         {            
             var sb = new StringBuilder();
@@ -26,6 +26,7 @@ namespace mikubot.Modules
             replies.Add("I am Miku!");
             replies.Add("Sleepy...");
             replies.Add("https://tenor.com/view/anime-hatsune-miku-excited-happy-gif-12331671");
+            replies.Add("...");
 
             embed.WithColor(new Discord.Color(0, 255, 0));
             embed.Title = "Chat with Miku!";
@@ -65,6 +66,11 @@ namespace mikubot.Modules
                     case "https://tenor.com/view/anime-hatsune-miku-excited-happy-gif-12331671":
                     {
                         embed.WithColor(new Discord.Color(255, 255, 255));
+                        break;
+                    }
+                    case "...":
+                    {
+                        embed.WithColor(new Discord.Color(0, 0, 0));
                         break;
                     }
                 }
