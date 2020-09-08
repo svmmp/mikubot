@@ -59,9 +59,9 @@ namespace mikubot
             if (message.Author.Id == _client.CurrentUser.Id)
                 return;
             
-            if (message.Content == ".hello")
+            if (message.Content == "^hello")
             {
-                await message.Channel.SendMessageAsync("world!");
+                await message.Channel.SendMessageAsync("hello!");
             }
         }
     }
