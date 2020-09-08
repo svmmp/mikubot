@@ -14,7 +14,7 @@ namespace mikubot.Modules
     public class ExampleCommands : ModuleBase
     {
         [Command("talktomiku")]
-        [Alias("hello")]
+        [Alias("chat")]
         public async Task HelloCommand([Remainder]string args = null)
         {            
             var sb = new StringBuilder();
