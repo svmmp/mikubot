@@ -1,45 +1,62 @@
 ﻿using System;
 using Discord;
 using Discord.Net;
+using Discord.Commands;
 using Discord.WebSocket;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.DependencyInjection;
+using csharpi.Services;
 
 namespace mikubot
 {
     class Program
     {
-        private readonly DiscordSocketClient _client;
+        // setup our fields we assign later
         private readonly IConfiguration _config;
+        private DiscordSocketClient _client;
 
-        static void Main(String[] args)
+        static void Main(string[] args)
         {
-            new Program().MainAsync().GetAwaiter().GetResult();            
+            new Program().MainAsync().GetAwaiter().GetResult();
         }
 
         public Program()
         {
-            _client = new DiscordSocketClient();
-
-            _client.Log += LogAsync;
-
-            _client.Ready += ReadyAsync;
-
-            _client.MessageReceived += MessageReceivedAsync;
-
+            // create the configuration
             var _builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
-                .AddJsonFile(path: "config.json");
+                .AddJsonFile(path: "config.json");  
+
+            // build the configuration and assign to _config          
             _config = _builder.Build();
         }
 
         public async Task MainAsync()
         {
-            await _client.LoginAsync(TokenType.Bot, _config["Token"]);
-            await _client.StartAsync();
+            // call ConfigureServices to create the ServiceCollection/Provider for passing around the services
+            using (var services = ConfigureServices())
+            {
+                // get the client and assign to client 
+                // you get the services via GetRequiredService<T>
+                var client = services.GetRequiredService<DiscordSocketClient>();
+                _client = client;
 
-            await Task.Delay(-1);
+                // setup logging and the ready event
+                client.Log += LogAsync;
+                client.Ready += ReadyAsync;
+                services.GetRequiredService<CommandService>().Log += LogAsync;
+
+                // this is where we get the Token value from the configuration file, and start the bot
+                await client.LoginAsync(TokenType.Bot, _config["Token"]);
+                await client.StartAsync();
+
+                // we get the CommandHandler class here and call the InitializeAsync method to start things up for the CommandHandler service
+                await services.GetRequiredService<CommandHandler>().InitializeAsync();
+
+                await Task.Delay(-1);
+            }
         }
 
         private Task LogAsync(LogMessage log)
@@ -54,15 +71,19 @@ namespace mikubot
             return Task.CompletedTask;
         }
 
-        private async Task MessageReceivedAsync(SocketMessage message)
+        // this method handles the ServiceCollection creation/configuration, and builds out the service provider we can call on later
+        private ServiceProvider ConfigureServices()
         {
-            if (message.Author.Id == _client.CurrentUser.Id)
-                return;
-            
-            if (message.Content == "^hello")
-            {
-                await message.Channel.SendMessageAsync("hello!");
-            }
+            // this returns a ServiceProvider that is used later to call for those services
+            // we can add types we have access to here, hence adding the new using statement:
+            // using csharpi.Services;
+            // the config we build is also added, which comes in handy for setting the command prefix!
+            return new ServiceCollection()
+                .AddSingleton(_config)
+                .AddSingleton<DiscordSocketClient>()
+                .AddSingleton<CommandService>()
+                .AddSingleton<CommandHandler>()
+                .BuildServiceProvider();
         }
     }
 }
