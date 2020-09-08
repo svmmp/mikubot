@@ -11,10 +11,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace mikubot.Modules
 {
-    public class 8ballcommands : ModuleBase
-            await ReplyAsync(sb.ToString());
-        }        
-
+    public class ExampleCommand : ModuleBase
+    {
         [Command("8ball")]
         [Alias("ask")]
         public async Task AskEightBall([Remainder]string args = null)
