@@ -8,9 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
-using System.Reflection;
-using Microsoft.VisualBasic;
-using System.Drawing;
 
 namespace mikubot.Modules
 {
@@ -51,24 +48,31 @@ namespace mikubot.Modules
                 switch (answer)
                 {
                     case "My name is Miku!":
-                        {
-                            embed.WithColor(new Discord.Color(0, 255, 0));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(0, 255, 0));
+                        break;
+                    }
                     case "I am Miku!":
-                        {
-                            embed.WithColor(new Discord.Color(255, 0, 0));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(255, 0, 0));
+                        break;
+                    }
                     case "Sleepy...":
-                        {
-                            embed.WithColor(new Discord.Color(255, 255, 0));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(255, 255, 0));
+                        break;
+                    }
                     case "https://tenor.com/view/anime-hatsune-miku-excited-happy-gif-12331671":
-                        {
-                            embed.WithColor(new Discord.Color(255, 255, 255));
-                            break;
-                        }
+                    {
+                        embed.WithColor(new Discord.Color(255, 255, 255));
+                        break;
+                    }
+                }
             }
-        
+
+            embed.Description = sb.ToString();
+
+            await ReplyAsync(null, false, embed.Build());
+        }
+    }
+}  
