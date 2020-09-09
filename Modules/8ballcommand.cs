@@ -52,12 +52,12 @@ namespace mikubot.Modules
                 {
                     case "yes":
                     {
-                        embed.WithColor(new Color(14177041));
+                        embed.WithColor(new Color(1752220));
                         break;
                     }
                     case "no":
                     {
-                        embed.WithColor(new Color(15844367));
+                        embed.WithColor(new Color(15105570));
                         break;
                     }
                     case "maybe":
