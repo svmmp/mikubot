@@ -52,37 +52,37 @@ namespace mikubot.Modules
                 {
                     case "yes":
                     {
-                        embed.WithColor(new Discord.Color(14177041));
+                        embed.WithColor(new Color(14177041));
                         break;
                     }
                     case "no":
                     {
-                        embed.WithColor(new Discord.Color(15844367));
+                        embed.WithColor(new Color(15844367));
                         break;
                     }
                     case "maybe":
                     {
-                        embed.WithColor(new Discord.Color(7419530));
+                        embed.WithColor(new Color(7419530));
                         break;
                     }
                     case "ask again":
                     {
-                        embed.WithColor(new Discord.Color(16580705));
+                        embed.WithColor(new Color(16580705));
                         break;
                     }
                     case "Miku doesn't know":
                     {
-                        embed.WithColor(new Discord.Color(10038562));
+                        embed.WithColor(new Color(10038562));
                         break;
                     }
                     case "Too tired to answer...":
                     {
-                        embed.WithColor(new Discord.Color(0, 0, 255));
+                        embed.WithColor(new Color(0, 0, 255));
                         break;
                     }
                     case "...":
                     {
-                        embed.WithColor(new Discord.Color(0, 0, 0));
+                        embed.WithColor(new Color(0, 0, 0));
                         break;
                     }
                 }
