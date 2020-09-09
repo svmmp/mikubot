@@ -1,5 +1,3 @@
 /bin
 /obj
 *.json
-*.json
-/logs
