@@ -6,14 +6,11 @@ using Discord.WebSocket;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
-using Microsoft.Extensions.DependencyInjection;
-using csharpi.Services;
 
 namespace mikubot
 {
     class Program
     {
-        // setup our fields we assign later
         private readonly IConfiguration _config;
         private DiscordSocketClient _client;
 
@@ -24,12 +21,10 @@ namespace mikubot
 
         public Program()
         {
-            // create the configuration
             var _builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile(path: "config.json");  
-
-            // build the configuration and assign to _config          
+        
             _config = _builder.Build();
         }
 
